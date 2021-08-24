@@ -9,13 +9,9 @@ import software.amazon.awscdk.services.apigateway.RestApiProps;
 import software.amazon.awscdk.services.lambda.*;
 import software.amazon.awscdk.services.lambda.Runtime;
 import software.amazon.awscdk.services.logs.RetentionDays;
-import software.amazon.awscdk.services.s3.Bucket;
+
 import software.amazon.awscdk.services.s3.assets.Asset;
 import software.amazon.awscdk.services.s3.assets.AssetProps;
-import software.amazon.awscdk.services.s3.deployment.BucketDeployment;
-import software.amazon.awscdk.services.s3.deployment.BucketDeploymentProps;
-import software.amazon.awscdk.services.s3.deployment.Source;
-import sun.util.resources.cldr.ext.LocaleNames_yav;
 
 import java.io.File;
 import java.util.Arrays;
