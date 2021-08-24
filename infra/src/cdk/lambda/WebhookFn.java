@@ -32,7 +32,12 @@ public class WebhookFn implements RequestHandler<APIGatewayV2ProxyRequestEvent, 
         System.out.println("request body: " + body);
         final Gson gson = new GsonBuilder().setPrettyPrinting().setExclusionStrategies(exclusionStrategy).create();
         final GHEventPayload.Push pushEvent = gson.fromJson(body, GHEventPayload.Push.class);
-        System.out.println("commit id:" + pushEvent.getHead());
+        System.out.println("commit id:" + pushEvent.getRef());
+        for(final GHEventPayload.Push.PushCommit commit : pushEvent.getCommits()) {
+            for(final String path : commit.getModified()) {
+                System.out.println("\t" + path);
+            }
+        }
 
         final APIGatewayV2ProxyResponseEvent resp = new APIGatewayV2ProxyResponseEvent();
         resp.setStatusCode(200);
