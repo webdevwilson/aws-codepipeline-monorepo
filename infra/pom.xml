@@ -5,7 +5,7 @@
     <artifactId>lambda-mvn-cdk-infra</artifactId>
     <parent>
         <groupId>dev.kerrywilson.aws</groupId>
-        <artifactId>lambda-mvn-cdk</artifactId>
+        <artifactId>aws-codepipeline-monorepo</artifactId>
         <version>0.1</version>
     </parent>
     <properties>
@@ -18,8 +18,28 @@
                 <artifactId>exec-maven-plugin</artifactId>
                 <version>3.0.0</version>
                 <configuration>
-                    <mainClass>cdk.Stack</mainClass>
+                    <mainClass>cdk.App</mainClass>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>3.2.0</version>
+                <executions>
+                    <execution>
+                        <id>copy-dependencies</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>copy-dependencies</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}/deps/java/lib</outputDirectory>
+                            <excludeGroupIds>software.amazon.awscdk,org.projectlombok</excludeGroupIds>
+                            <includeScope>compile</includeScope>
+                            <excludeTransitive>true</excludeTransitive>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
@@ -34,6 +54,71 @@
             <groupId>software.amazon.awscdk</groupId>
             <artifactId>lambda</artifactId>
             <version>${cdk.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>software.amazon.awscdk</groupId>
+            <artifactId>s3-assets</artifactId>
+            <version>${cdk.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>software.amazon.awscdk</groupId>
+            <artifactId>s3-deployment</artifactId>
+            <version>${cdk.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>software.amazon.awscdk</groupId>
+            <artifactId>apigateway</artifactId>
+            <version>${cdk.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.amazonaws</groupId>
+            <artifactId>aws-lambda-java-events</artifactId>
+            <version>2.2.9</version>
+        </dependency>
+        <dependency>
+            <groupId>com.amazonaws</groupId>
+            <artifactId>aws-lambda-java-core</artifactId>
+            <version>1.2.1</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.kohsuke</groupId>
+            <artifactId>github-api</artifactId>
+            <version>1.132</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.8.8</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.11.4</version>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.20</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <version>3.18.1</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 </project>
