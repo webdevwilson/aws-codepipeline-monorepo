@@ -1,4 +1,4 @@
-package cdk.trigger;
+package cdk.trigger.lambda;
 
 import java.util.List;
 
@@ -7,7 +7,7 @@ import java.util.List;
  */
 @lombok.Data
 @lombok.Builder
-public class TriggerLambdaEvent {
+public class Event {
 
     // paths modified in the last commit
     private List<String> modifiedPaths;

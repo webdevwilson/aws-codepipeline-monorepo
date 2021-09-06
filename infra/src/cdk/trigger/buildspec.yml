@@ -1,0 +1,14 @@
+version: 0.2
+phases:
+  install:
+    runtime-versions:
+      java: openjdk8
+      nodejs: 12
+    commands:
+      - npm install -g cdk
+  build:
+    commands:
+      - cd infra; cdk synth;
+artifacts:
+  files:
+    - infra/cdk.out/**/*
