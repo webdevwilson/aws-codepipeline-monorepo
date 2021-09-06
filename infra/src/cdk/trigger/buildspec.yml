@@ -8,7 +8,9 @@ phases:
       - npm install -g cdk@1.121.0
   build:
     commands:
-      - cd infra; cdk synth;
+      - cd infra
+      - mvn clean package
+      - cdk synth
 artifacts:
   files:
     - infra/cdk.out/**/*

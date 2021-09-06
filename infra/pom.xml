@@ -51,7 +51,7 @@
                             <outputDirectory>${project.build.directory}/deps/java/lib</outputDirectory>
                             <excludeGroupIds>software.amazon.awscdk,org.projectlombok</excludeGroupIds>
                             <includeScope>compile</includeScope>
-                            <excludeTransitive>true</excludeTransitive>
+                            <excludeTransitive>false</excludeTransitive>
                         </configuration>
                     </execution>
                 </executions>
@@ -85,6 +85,7 @@
             <artifactId>cdk-pipelines</artifactId>
             <version>${cdk.version}</version>
         </dependency>
+        <!-- in order to keep the lambda layer as small as possible, explicitly declare core dep -->
         <dependency>
             <groupId>software.amazon.awssdk</groupId>
             <artifactId>codepipeline</artifactId>
