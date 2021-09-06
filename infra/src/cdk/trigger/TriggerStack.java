@@ -89,6 +89,7 @@ public class TriggerStack extends Stack {
                 .build());
 
         // create the action that does a cdk synth to manage application pipelines
+        final Artifact synthArtifact = Artifact.artifact("CdkSynth");
         final PipelineProject project = new PipelineProject(this, "triggerPipelineCdkBuild",
                 PipelineProjectProps.builder()
                 .projectName("cdk-synth")
@@ -98,6 +99,7 @@ public class TriggerStack extends Stack {
                 .actionName("cdk-synth")
                 .project(project)
                 .input(sourceArtifact)
+                .outputs(Arrays.asList(synthArtifact))
                 .build());
 
         // invoke the filter lambda
