@@ -1,0 +1,6 @@
+pipelines:
+  - paths:
+      - foo/*
+      - bar/*
+    commands:
+      - make foo

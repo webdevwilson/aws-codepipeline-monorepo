@@ -1,11 +1,9 @@
-package cdk;
+package cdk.trigger;
 
-import cdk.App;
+import cdk.ConfigurationFile;
 import software.amazon.awscdk.core.*;
 import software.amazon.awscdk.services.apigateway.LambdaRestApi;
 import software.amazon.awscdk.services.apigateway.LambdaRestApiProps;
-import software.amazon.awscdk.services.apigateway.RestApi;
-import software.amazon.awscdk.services.apigateway.RestApiProps;
 import software.amazon.awscdk.services.lambda.*;
 import software.amazon.awscdk.services.lambda.Runtime;
 import software.amazon.awscdk.services.logs.RetentionDays;
@@ -18,9 +16,9 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-public class WebhookStack extends Stack {
+public class TriggerStack extends Stack {
 
-    WebhookStack(final Construct scope, final String id, final ConfigurationFile configFile) {
+    public TriggerStack(final Construct scope, final String id, final ConfigurationFile configFile) {
         super(scope, id, null);
 
         // Write config to local
@@ -50,7 +48,7 @@ public class WebhookStack extends Stack {
                 .functionName(id)
                 .runtime(Runtime.JAVA_8)
                 .code(Code.fromAsset("target/lambda-mvn-cdk-infra-0.1.jar"))
-                .handler("cdk.lambda.WebhookFn")
+                .handler("cdk.trigger.lambda.WebhookFn")
                 .layers(Arrays.asList(layer))
                 .memorySize(1024)
                 .environment(env)
