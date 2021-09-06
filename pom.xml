@@ -12,7 +12,6 @@
     </properties>
     <modules>
         <module>infra</module>
-        <module>lambdas</module>
     </modules>
     <build>
         <sourceDirectory>src</sourceDirectory>

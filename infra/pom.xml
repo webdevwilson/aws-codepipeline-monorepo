@@ -9,7 +9,7 @@
         <version>0.1</version>
     </parent>
     <properties>
-        <cdk.version>1.118.0</cdk.version>
+        <cdk.version>1.121.0</cdk.version>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -30,6 +30,10 @@
                 <version>3.0.0</version>
                 <configuration>
                     <mainClass>cdk.App</mainClass>
+                    <arguments>
+                        <argument>${project.artifactId}</argument>
+                        <argument>${project.version}</argument>
+                    </arguments>
                 </configuration>
             </plugin>
             <plugin>

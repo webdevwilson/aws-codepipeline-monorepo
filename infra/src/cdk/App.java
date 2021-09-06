@@ -13,6 +13,8 @@ public class App {
     public static void main(final String[] args) {
         final software.amazon.awscdk.core.App app = new software.amazon.awscdk.core.App();
 
+        final String artifactId = args[0];
+        final String version = args[1];
 
         // create pipelines and configuration
         final GithubSource githubSource = GithubSource.builder()
@@ -57,6 +59,7 @@ public class App {
 
         new TriggerStack(app, "triggerStack", TriggerStack.Props.builder()
                 .pipelineName("monorepo-trigger")
+                .jar(String.format("target/%s-%s.jar", artifactId, version))
                 .githubSource(githubSource)
                 .build());
 

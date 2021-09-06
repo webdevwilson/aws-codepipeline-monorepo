@@ -28,6 +28,7 @@ public class TriggerStack extends Stack {
     @lombok.Builder
     @lombok.Data
     public static final class Props {
+        private String jar;
         private String pipelineName;
         private StackProps stackProps;
         private GithubSource githubSource;
@@ -61,7 +62,7 @@ public class TriggerStack extends Stack {
         final Function fn = new Function(this, "fn", FunctionProps.builder()
                 .functionName(id)
                 .runtime(Runtime.JAVA_8)
-                .code(Code.fromAsset("target/lambda-mvn-cdk-infra-0.1.jar"))
+                .code(Code.fromAsset(props.jar))
                 .handler(cdk.trigger.lambda.Fn.class.getName())
                 .layers(Arrays.asList(layer))
                 .memorySize(1024)
